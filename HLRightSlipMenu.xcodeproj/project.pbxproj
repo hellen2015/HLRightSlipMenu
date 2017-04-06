@@ -15,6 +15,13 @@
 		741CCD081E9632B000D074D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741CCD061E9632B000D074D6 /* LaunchScreen.storyboard */; };
 		741CCD131E9632B000D074D6 /* HLRightSlipMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD121E9632B000D074D6 /* HLRightSlipMenuTests.m */; };
 		741CCD1E1E9632B000D074D6 /* HLRightSlipMenuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD1D1E9632B000D074D6 /* HLRightSlipMenuUITests.m */; };
+		741CCD2E1E96336600D074D6 /* SHLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD2D1E96336600D074D6 /* SHLMainViewController.m */; };
+		741CCD311E9633E400D074D6 /* SHLTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD301E9633E400D074D6 /* SHLTabbar.m */; };
+		741CCD371E96359D00D074D6 /* SHLHomePageCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD361E96359D00D074D6 /* SHLHomePageCtrl.m */; };
+		741CCD3A1E9635AF00D074D6 /* SHLMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD391E9635AF00D074D6 /* SHLMeViewController.m */; };
+		741CCD3D1E96369500D074D6 /* SHLNavigationCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD3C1E96369500D074D6 /* SHLNavigationCtrl.m */; };
+		741CCD411E9637DE00D074D6 /* SHLRightSlipMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */; };
+		741CCD451E96394200D074D6 /* SHLLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD441E96394200D074D6 /* SHLLeftView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,20 @@
 		741CCD191E9632B000D074D6 /* HLRightSlipMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HLRightSlipMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		741CCD1D1E9632B000D074D6 /* HLRightSlipMenuUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLRightSlipMenuUITests.m; sourceTree = "<group>"; };
 		741CCD1F1E9632B000D074D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		741CCD2C1E96336600D074D6 /* SHLMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLMainViewController.h; sourceTree = "<group>"; };
+		741CCD2D1E96336600D074D6 /* SHLMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLMainViewController.m; sourceTree = "<group>"; };
+		741CCD2F1E9633E400D074D6 /* SHLTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLTabbar.h; sourceTree = "<group>"; };
+		741CCD301E9633E400D074D6 /* SHLTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLTabbar.m; sourceTree = "<group>"; };
+		741CCD351E96359D00D074D6 /* SHLHomePageCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLHomePageCtrl.h; sourceTree = "<group>"; };
+		741CCD361E96359D00D074D6 /* SHLHomePageCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLHomePageCtrl.m; sourceTree = "<group>"; };
+		741CCD381E9635AF00D074D6 /* SHLMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLMeViewController.h; sourceTree = "<group>"; };
+		741CCD391E9635AF00D074D6 /* SHLMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLMeViewController.m; sourceTree = "<group>"; };
+		741CCD3B1E96369500D074D6 /* SHLNavigationCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLNavigationCtrl.h; sourceTree = "<group>"; };
+		741CCD3C1E96369500D074D6 /* SHLNavigationCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLNavigationCtrl.m; sourceTree = "<group>"; };
+		741CCD3F1E9637DE00D074D6 /* SHLRightSlipMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLRightSlipMenu.h; sourceTree = "<group>"; };
+		741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLRightSlipMenu.m; sourceTree = "<group>"; };
+		741CCD431E96394200D074D6 /* SHLLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLLeftView.h; sourceTree = "<group>"; };
+		741CCD441E96394200D074D6 /* SHLLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLLeftView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +122,9 @@
 		741CCCF71E9632AF00D074D6 /* HLRightSlipMenu */ = {
 			isa = PBXGroup;
 			children = (
+				741CCD3E1E96375B00D074D6 /* rightSlip */,
+				741CCD321E96342300D074D6 /* classes */,
+				741CCD2B1E96330700D074D6 /* main */,
 				741CCCFB1E9632B000D074D6 /* AppDelegate.h */,
 				741CCCFC1E9632B000D074D6 /* AppDelegate.m */,
 				741CCCFE1E9632B000D074D6 /* ViewController.h */,
@@ -138,6 +162,65 @@
 				741CCD1F1E9632B000D074D6 /* Info.plist */,
 			);
 			path = HLRightSlipMenuUITests;
+			sourceTree = "<group>";
+		};
+		741CCD2B1E96330700D074D6 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD2C1E96336600D074D6 /* SHLMainViewController.h */,
+				741CCD2D1E96336600D074D6 /* SHLMainViewController.m */,
+				741CCD2F1E9633E400D074D6 /* SHLTabbar.h */,
+				741CCD301E9633E400D074D6 /* SHLTabbar.m */,
+				741CCD3B1E96369500D074D6 /* SHLNavigationCtrl.h */,
+				741CCD3C1E96369500D074D6 /* SHLNavigationCtrl.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		741CCD321E96342300D074D6 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD421E96392600D074D6 /* leftview */,
+				741CCD341E96349D00D074D6 /* page */,
+				741CCD331E96343900D074D6 /* me */,
+			);
+			name = classes;
+			sourceTree = "<group>";
+		};
+		741CCD331E96343900D074D6 /* me */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD381E9635AF00D074D6 /* SHLMeViewController.h */,
+				741CCD391E9635AF00D074D6 /* SHLMeViewController.m */,
+			);
+			name = me;
+			sourceTree = "<group>";
+		};
+		741CCD341E96349D00D074D6 /* page */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD351E96359D00D074D6 /* SHLHomePageCtrl.h */,
+				741CCD361E96359D00D074D6 /* SHLHomePageCtrl.m */,
+			);
+			name = page;
+			sourceTree = "<group>";
+		};
+		741CCD3E1E96375B00D074D6 /* rightSlip */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD3F1E9637DE00D074D6 /* SHLRightSlipMenu.h */,
+				741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */,
+			);
+			name = rightSlip;
+			sourceTree = "<group>";
+		};
+		741CCD421E96392600D074D6 /* leftview */ = {
+			isa = PBXGroup;
+			children = (
+				741CCD431E96394200D074D6 /* SHLLeftView.h */,
+				741CCD441E96394200D074D6 /* SHLLeftView.m */,
+			);
+			name = leftview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,8 +356,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741CCD311E9633E400D074D6 /* SHLTabbar.m in Sources */,
+				741CCD451E96394200D074D6 /* SHLLeftView.m in Sources */,
 				741CCD001E9632B000D074D6 /* ViewController.m in Sources */,
+				741CCD3D1E96369500D074D6 /* SHLNavigationCtrl.m in Sources */,
+				741CCD411E9637DE00D074D6 /* SHLRightSlipMenu.m in Sources */,
+				741CCD3A1E9635AF00D074D6 /* SHLMeViewController.m in Sources */,
+				741CCD2E1E96336600D074D6 /* SHLMainViewController.m in Sources */,
 				741CCCFD1E9632B000D074D6 /* AppDelegate.m in Sources */,
+				741CCD371E96359D00D074D6 /* SHLHomePageCtrl.m in Sources */,
 				741CCCFA1E9632B000D074D6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
