@@ -4,3 +4,4 @@
 [[SHLRightSlipMenu shareInstance] addLeftview:leftview toviewctrl:self.tabBarController];
 #### 核心代码通过手势获取触摸点来判断左滑和右滑。
 #### 用到的主要实现类为SHLRightSlipMenu。
+![image](https://github.com/hellen2015/HLRightSlipMenu/blob/master/2017-04-07%2017_44_08.gif)
