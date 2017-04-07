@@ -64,12 +64,11 @@ static SHLRightSlipMenu *rightSlip;
 }
 - (void)setLeftsildview:(UIView *)leftsildview
 {
-    CGRect frame = leftsildview.frame;
     _leftsildview = leftsildview;
-    if (frame.size.width >= (SCREENBOUNSWIDTH * 0.8))  frame.size.width = SCREENBOUNSWIDTH * 0.8;
-    if (frame.size.height > SCREENBOUNSHEIGHT)  frame.size.height = SCREENBOUNSHEIGHT;
+    if (leftsildview.shl_width >= (SCREENBOUNSWIDTH * 0.8))  leftsildview.shl_width = SCREENBOUNSWIDTH * 0.8;
+    if (leftsildview.shl_height > SCREENBOUNSHEIGHT)  leftsildview.shl_height = SCREENBOUNSHEIGHT;
     
-    _leftsildview.frame = CGRectMake(-frame.size.width / 2, (SCREENBOUNSHEIGHT - frame.size.height) / 2, frame.size.width, frame.size.height);
+    _leftsildview.frame = CGRectMake(-leftsildview.shl_width / 2, (SCREENBOUNSHEIGHT - leftsildview.shl_height) / 2, leftsildview.shl_width, leftsildview.shl_height);
 }
 - (UIPanGestureRecognizer *)panGestureRecognizer
 {
@@ -120,7 +119,7 @@ static SHLRightSlipMenu *rightSlip;
         {
             [self moveToMinWithAnimation:NO];
         }
-        else if ((_startOrigin.x + pointWindow.x - _startPoint.x) > self.sideView.frame.size.width)
+        else if ((_startOrigin.x + pointWindow.x - _startPoint.x) > self.sideView.shl_width)
         {
             [self moveToMaxWithAnimation:NO];
         }
@@ -135,7 +134,7 @@ static SHLRightSlipMenu *rightSlip;
         
         CGPoint verPoint = [gestureRecognizer velocityInView:self.mainviewctrl.view];
         
-        if (verPoint.x > self.sideView.frame.size.width || (self.mainviewctrl.view.frame.origin.x > self.sideView.frame.size.width / 2 && verPoint.x > -self.sideView.frame.size.width))
+        if (verPoint.x > self.sideView.frame.size.width || (self.mainviewctrl.view.shl_x > self.sideView.shl_width / 2 && verPoint.x > -self.sideView.shl_width))
         {
             [self moveToMaxWithAnimation:YES];
         }
@@ -156,16 +155,16 @@ static SHLRightSlipMenu *rightSlip;
     }
     
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
-        [self.mainviewctrl.view setX:0];
-        [self.sideView setX:-self.sideView.frame.size.width / 2];
+        self.mainviewctrl.view.shl_x = 0;
+        self.sideView.shl_x = -self.sideView.shl_width/2;
     } completion:^(BOOL finished) {
     }];
 }
 
 - (void)moveToPointX:(CGFloat)pointX
 {
-    [self.mainviewctrl.view setX:pointX];
-    [self.sideView setX:pointX / 2 - self.sideView.frame.size.width / 2];
+    self.mainviewctrl.view.shl_x = pointX;
+    self.sideView.shl_x = pointX/2 - self.sideView.shl_width/2;
 }
 
 - (void)moveToMaxWithAnimation:(BOOL)animation
@@ -175,13 +174,13 @@ static SHLRightSlipMenu *rightSlip;
     {
         UIButton *clickBackButton = [[UIButton alloc] initWithFrame:self.mainviewctrl.view.bounds];
         clickBackButton.backgroundColor = [UIColor clearColor];
-        [clickBackButton addTarget:self action:@selector(onBackButton:) forControlEvents:UIControlEventTouchUpInside];
+        [clickBackButton addTarget:self action:@selector(onBackButton) forControlEvents:UIControlEventTouchUpInside];
         self.clickBackButton = clickBackButton;
         [self.mainviewctrl.view addSubview:clickBackButton];
     }
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
-        [self.mainviewctrl.view setX:self.sideView.frame.size.width];
-        [self.sideView setX:0];
+        self.mainviewctrl.view.shl_x = self.sideView.shl_width;
+        self.sideView.shl_x = 0;
     }];
 }
 - (UIView *)sideView
@@ -193,10 +192,9 @@ static SHLRightSlipMenu *rightSlip;
     }
     return _leftsildview;
 }
-- (void)onBackButton:(id)sender
+- (void)onBackButton
 {
-    UIButton *backButton = (UIButton *)sender;
-    [backButton removeFromSuperview];
+    [self.clickBackButton removeFromSuperview];
     [self moveToMinWithAnimation:YES];
 }
 
