@@ -78,10 +78,6 @@ static SHLRightSlipMenu *rightSlip;
     }
     return _panGestureRecognizer;
 }
-- (void)removeSideView
-{
-    [self initSet];
-}
 - (void)initSet
 {
     if (self.sideView)
