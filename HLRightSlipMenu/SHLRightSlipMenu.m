@@ -12,10 +12,11 @@
 static SHLRightSlipMenu *rightSlip;
 #define SCREENBOUNSWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENBOUNSHEIGHT [UIScreen mainScreen].bounds.size.height
+#define SLIPPOINTVALUE 80
 @interface SHLRightSlipMenu ()
 {
-    BOOL _bMove;
-    CGPoint _startPoint;
+    BOOL _moveEnabel;
+    CGPoint _startSlipPoint;
     CGPoint _startOrigin;
 }
 @property (nonatomic, strong) UIView *leftsildview;
@@ -68,7 +69,7 @@ static SHLRightSlipMenu *rightSlip;
     if (leftsildview.shl_width >= (SCREENBOUNSWIDTH * 0.8))  leftsildview.shl_width = SCREENBOUNSWIDTH * 0.8;
     if (leftsildview.shl_height > SCREENBOUNSHEIGHT)  leftsildview.shl_height = SCREENBOUNSHEIGHT;
     
-    _leftsildview.frame = CGRectMake(-leftsildview.shl_width / 2, (SCREENBOUNSHEIGHT - leftsildview.shl_height) / 2, leftsildview.shl_width, leftsildview.shl_height);
+    _leftsildview.frame = CGRectMake(-leftsildview.shl_width, (SCREENBOUNSHEIGHT - leftsildview.shl_height) / 2, leftsildview.shl_width, leftsildview.shl_height);
 }
 - (UIPanGestureRecognizer *)panGestureRecognizer
 {
@@ -86,6 +87,7 @@ static SHLRightSlipMenu *rightSlip;
             [self.sideView removeFromSuperview];
         self.leftsildview = nil;
         [self.mainviewctrl.view removeGestureRecognizer:self.panGestureRecognizer];
+        self.mainviewctrl.view.alpha = 0.6;
         self.mainviewctrl = nil;
         self.slipEnable = NO;
     }
@@ -93,44 +95,47 @@ static SHLRightSlipMenu *rightSlip;
 #pragma mark --------手势处理响应-------
 - (void)handleOfPanGestureRecognizer:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    //拿到手势进行判断
     if (!self.slipEnable) return;
-    CGPoint pointView = [gestureRecognizer locationInView:self.mainviewctrl.view];
+    //1.获取相对于mainview的触摸点
+    CGPoint pointMainView = [gestureRecognizer locationInView:self.mainviewctrl.view];
+    //2.获取相对于window的触摸点
     CGPoint pointWindow = [gestureRecognizer locationInView:self.mainviewctrl.view.window];
-    
+    //3.拿到手势状态
     UIGestureRecognizerState state = gestureRecognizer.state;
-    
+    //4.进行判断
     if (state == UIGestureRecognizerStateBegan)
     {
-        if (pointView.x > 50) _bMove = NO;
-        else _bMove = YES;
-        _startPoint = pointWindow;
+        if (pointMainView.x > SLIPPOINTVALUE) _moveEnabel = NO;
+        else _moveEnabel = YES;
+        
+        _startSlipPoint = pointWindow;
+        //获取mainview原点
         _startOrigin = self.mainviewctrl.view.frame.origin;
     }
     else if (state == UIGestureRecognizerStateChanged)
     {
-        if ( !_bMove) return;
+        if ( !_moveEnabel) return;
         
-        if ((_startOrigin.x + pointWindow.x - _startPoint.x) < 0 )
+        if ((_startOrigin.x + pointWindow.x - _startSlipPoint.x) < 0 )
         {
             [self moveToMinWithAnimation:NO];
         }
-        else if ((_startOrigin.x + pointWindow.x - _startPoint.x) > self.sideView.shl_width)
+        else if ((_startOrigin.x + pointWindow.x - _startSlipPoint.x) > self.sideView.shl_width)
         {
             [self moveToMaxWithAnimation:NO];
         }
         else
         {
-            [self moveToPointX:_startOrigin.x + pointWindow.x - _startPoint.x ];
+            [self moveToPointX:_startOrigin.x + pointWindow.x - _startSlipPoint.x ];
         }
     }
     else
     {
-        if ( !_bMove) return;
+        if ( !_moveEnabel) return;
         
         CGPoint verPoint = [gestureRecognizer velocityInView:self.mainviewctrl.view];
         
-        if (verPoint.x > self.sideView.frame.size.width || (self.mainviewctrl.view.shl_x > self.sideView.shl_width / 2 && verPoint.x > -self.sideView.shl_width))
+        if (verPoint.x > self.sideView.shl_width || (self.mainviewctrl.view.shl_x > self.sideView.shl_width/2 && verPoint.x > -self.sideView.shl_width))
         {
             [self moveToMaxWithAnimation:YES];
         }
@@ -149,10 +154,11 @@ static SHLRightSlipMenu *rightSlip;
     {
         [self.clickBackButton removeFromSuperview];
     }
-    
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
         self.mainviewctrl.view.shl_x = 0;
-        self.sideView.shl_x = -self.sideView.shl_width/2;
+        self.sideView.shl_x = -self.sideView.shl_width;
+        //设置mainview的透明度
+        self.mainviewctrl.view.alpha = 1;
     } completion:^(BOOL finished) {
     }];
 }
@@ -160,12 +166,14 @@ static SHLRightSlipMenu *rightSlip;
 - (void)moveToPointX:(CGFloat)pointX
 {
     self.mainviewctrl.view.shl_x = pointX;
-    self.sideView.shl_x = pointX/2 - self.sideView.shl_width/2;
+    self.sideView.shl_x = pointX - self.sideView.shl_width;
+    //设置mainview的透明度
+    self.mainviewctrl.view.alpha = 1 - pointX/(SCREENBOUNSWIDTH * 0.8) * 0.5;
 }
 
 - (void)moveToMaxWithAnimation:(BOOL)animation
 {
-    if (self.sideView.frame.origin.x == 0) return;
+    if (self.sideView.shl_x == 0) return;
     if (!self.clickBackButton.superview)
     {
         UIButton *clickBackButton = [[UIButton alloc] initWithFrame:self.mainviewctrl.view.bounds];
@@ -177,6 +185,8 @@ static SHLRightSlipMenu *rightSlip;
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
         self.mainviewctrl.view.shl_x = self.sideView.shl_width;
         self.sideView.shl_x = 0;
+        //设置mainview的透明度
+        self.mainviewctrl.view.alpha = 1 - 0.5;
     }];
 }
 - (UIView *)sideView
@@ -184,7 +194,6 @@ static SHLRightSlipMenu *rightSlip;
     if (_leftsildview && ![_leftsildview.superview isKindOfClass:[UIWindow class]])
     {
         [self.mainviewctrl.view.window insertSubview:_leftsildview atIndex:0];
-        self.mainviewctrl.view.window.userInteractionEnabled = YES;
     }
     return _leftsildview;
 }
