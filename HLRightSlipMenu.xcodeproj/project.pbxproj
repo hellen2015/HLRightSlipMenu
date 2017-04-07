@@ -22,6 +22,7 @@
 		741CCD3D1E96369500D074D6 /* SHLNavigationCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD3C1E96369500D074D6 /* SHLNavigationCtrl.m */; };
 		741CCD411E9637DE00D074D6 /* SHLRightSlipMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */; };
 		741CCD451E96394200D074D6 /* SHLLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741CCD441E96394200D074D6 /* SHLLeftView.m */; };
+		74455C481E97654B003492AB /* UIView+frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 74455C471E97654B003492AB /* UIView+frame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLRightSlipMenu.m; sourceTree = "<group>"; };
 		741CCD431E96394200D074D6 /* SHLLeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLLeftView.h; sourceTree = "<group>"; };
 		741CCD441E96394200D074D6 /* SHLLeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLLeftView.m; sourceTree = "<group>"; };
+		74455C461E97654B003492AB /* UIView+frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+frame.h"; sourceTree = "<group>"; };
+		74455C471E97654B003492AB /* UIView+frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frame.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +213,8 @@
 			children = (
 				741CCD3F1E9637DE00D074D6 /* SHLRightSlipMenu.h */,
 				741CCD401E9637DE00D074D6 /* SHLRightSlipMenu.m */,
+				74455C461E97654B003492AB /* UIView+frame.h */,
+				74455C471E97654B003492AB /* UIView+frame.m */,
 			);
 			name = rightSlip;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				741CCD411E9637DE00D074D6 /* SHLRightSlipMenu.m in Sources */,
 				741CCD3A1E9635AF00D074D6 /* SHLMeViewController.m in Sources */,
 				741CCD2E1E96336600D074D6 /* SHLMainViewController.m in Sources */,
+				74455C481E97654B003492AB /* UIView+frame.m in Sources */,
 				741CCCFD1E9632B000D074D6 /* AppDelegate.m in Sources */,
 				741CCD371E96359D00D074D6 /* SHLHomePageCtrl.m in Sources */,
 				741CCCFA1E9632B000D074D6 /* main.m in Sources */,
@@ -597,6 +603,7 @@
 				741CCD241E9632B000D074D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		741CCD251E9632B000D074D6 /* Build configuration list for PBXNativeTarget "HLRightSlipMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -605,6 +612,7 @@
 				741CCD271E9632B000D074D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		741CCD281E9632B000D074D6 /* Build configuration list for PBXNativeTarget "HLRightSlipMenuUITests" */ = {
 			isa = XCConfigurationList;
@@ -613,6 +621,7 @@
 				741CCD2A1E9632B000D074D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

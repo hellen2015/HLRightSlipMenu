@@ -8,18 +8,10 @@
 
 #import "SHLRightSlipMenu.h"
 #import "SHLLeftView.h"
+#import "UIView+frame.h"
 static SHLRightSlipMenu *rightSlip;
-@implementation UIView (Frame)
-
-- (void)setX:(CGFloat )originX
-{
-    CGRect rect = self.frame;
-    
-    rect.origin.x = originX;
-    
-    self.frame = rect;
-}
-@end
+#define SCREENBOUNSWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENBOUNSHEIGHT [UIScreen mainScreen].bounds.size.height
 @interface SHLRightSlipMenu ()
 {
     BOOL _bMove;
@@ -29,11 +21,8 @@ static SHLRightSlipMenu *rightSlip;
 @property (nonatomic, strong) UIView *leftsildview;
 @property (nonatomic, strong) UIViewController *mainviewctrl;
 @property (strong, nonatomic)UIPanGestureRecognizer *panGestureRecognizer;
-/**
- *  是否可以侧滑,默认为NO。
- */
-@property (assign, nonatomic) BOOL sideslipEnable;
-
+@property (nonatomic, strong) UIButton *clickBackButton;
+@property (assign, nonatomic) BOOL slipEnable;
 @end
 @implementation SHLRightSlipMenu
 /**
@@ -45,7 +34,6 @@ static SHLRightSlipMenu *rightSlip;
 }
 +(instancetype)allocWithZone:(struct _NSZone *)zone
 {
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         rightSlip = [super allocWithZone: zone];
@@ -70,7 +58,7 @@ static SHLRightSlipMenu *rightSlip;
         [self initSet];
         self.leftsildview = leftview;
         self.mainviewctrl = viewctrl;
-        self.sideslipEnable = YES;
+        self.slipEnable = YES;
         [self.mainviewctrl.view addGestureRecognizer:self.panGestureRecognizer];
     }
 }
@@ -78,12 +66,10 @@ static SHLRightSlipMenu *rightSlip;
 {
     CGRect frame = leftsildview.frame;
     _leftsildview = leftsildview;
-    CGRect screenFrame = [UIScreen mainScreen].bounds;
+    if (frame.size.width >= (SCREENBOUNSWIDTH * 0.8))  frame.size.width = SCREENBOUNSWIDTH * 0.8;
+    if (frame.size.height > SCREENBOUNSHEIGHT)  frame.size.height = SCREENBOUNSHEIGHT;
     
-    if (frame.size.width >= (screenFrame.size.width * 0.8))  frame.size.width = screenFrame.size.width * 0.8;
-    if (frame.size.height > screenFrame.size.height)  frame.size.height = screenFrame.size.height;
-    
-    _leftsildview.frame = CGRectMake(-frame.size.width / 2, (screenFrame.size.height - frame.size.height) / 2, frame.size.width, frame.size.height);
+    _leftsildview.frame = CGRectMake(-frame.size.width / 2, (SCREENBOUNSHEIGHT - frame.size.height) / 2, frame.size.width, frame.size.height);
 }
 - (UIPanGestureRecognizer *)panGestureRecognizer
 {
@@ -97,7 +83,6 @@ static SHLRightSlipMenu *rightSlip;
 {
     [self initSet];
 }
-
 - (void)initSet
 {
     if (self.sideView)
@@ -107,14 +92,14 @@ static SHLRightSlipMenu *rightSlip;
         self.leftsildview = nil;
         [self.mainviewctrl.view removeGestureRecognizer:self.panGestureRecognizer];
         self.mainviewctrl = nil;
-        self.sideslipEnable = NO;
+        self.slipEnable = NO;
     }
 }
-#pragma mark ----------手势处理响应---------
+#pragma mark --------手势处理响应-------
 - (void)handleOfPanGestureRecognizer:(UIPanGestureRecognizer *)gestureRecognizer
 {
     //拿到手势进行判断
-    if (!self.sideslipEnable) return;
+    if (!self.slipEnable) return;
     CGPoint pointView = [gestureRecognizer locationInView:self.mainviewctrl.view];
     CGPoint pointWindow = [gestureRecognizer locationInView:self.mainviewctrl.view.window];
     
@@ -160,15 +145,14 @@ static SHLRightSlipMenu *rightSlip;
         }
     }
 }
-
-#pragma mark ---------视图位移处理--------------
+#pragma mark ------移动------
 - (void)moveToMinWithAnimation:(BOOL)animation
 {
     if (self.mainviewctrl.view.frame.origin.x == 0) return;
     
-    if ([self.mainviewctrl.view viewWithTag:205])
+    if (self.clickBackButton.superview)
     {
-        [[self.mainviewctrl.view viewWithTag:205] removeFromSuperview];
+        [self.clickBackButton removeFromSuperview];
     }
     
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
@@ -187,16 +171,14 @@ static SHLRightSlipMenu *rightSlip;
 - (void)moveToMaxWithAnimation:(BOOL)animation
 {
     if (self.sideView.frame.origin.x == 0) return;
-    if (![self.mainviewctrl.view viewWithTag:205])
+    if (!self.clickBackButton.superview)
     {
-        UIButton *backButton = [[UIButton alloc] initWithFrame:self.mainviewctrl.view.bounds];
-        backButton.backgroundColor = [UIColor clearColor];
-        [backButton addTarget:self action:@selector(onBackButton:) forControlEvents:UIControlEventTouchUpInside];
-        backButton.tag = 205;
-        [self.mainviewctrl.view addSubview:backButton];
+        UIButton *clickBackButton = [[UIButton alloc] initWithFrame:self.mainviewctrl.view.bounds];
+        clickBackButton.backgroundColor = [UIColor clearColor];
+        [clickBackButton addTarget:self action:@selector(onBackButton:) forControlEvents:UIControlEventTouchUpInside];
+        self.clickBackButton = clickBackButton;
+        [self.mainviewctrl.view addSubview:clickBackButton];
     }
-    
-    
     [UIView animateWithDuration:animation?0.25:0.0 animations:^{
         [self.mainviewctrl.view setX:self.sideView.frame.size.width];
         [self.sideView setX:0];

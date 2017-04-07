@@ -32,9 +32,9 @@
 - (void)setupChildViewControllers
 {
     SHLHomePageCtrl *first = [[SHLHomePageCtrl alloc] init];
-    [self setupOneChildViewController:first title:@"first" image:@"tab_device_default" selectedImage:@"tab_device_selected"];
+    [self setupOneChildViewController:first title:@"首页" image:@"tab_device_default" selectedImage:@"tab_device_selected"];
     SHLMeViewController *second = [[SHLMeViewController alloc] init];
-    [self setupOneChildViewController:second title:@"two" image:@"tab_personal_default" selectedImage:@"tab_personal_selected"];
+    [self setupOneChildViewController:second title:@"我" image:@"tab_personal_default" selectedImage:@"tab_personal_selected"];
     
 }
 - (void)setupOneChildViewController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
