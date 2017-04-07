@@ -7,8 +7,11 @@
 //
 
 #import "SHLLeftView.h"
+#define KHEIGHT 150
 @interface SHLLeftView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *lefttableview;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIImageView *headerImageView;
 @end
 @implementation SHLLeftView
 
@@ -39,14 +42,21 @@
     UIViewAutoresizingFlexibleHeight      |
     UIViewAutoresizingFlexibleBottomMargin;
     [self addSubview:_lefttableview];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, KHEIGHT)];
+    
+    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:self.headerView.bounds];
+    headerImageView.image = [UIImage imageNamed:@"bg_user"];
+    headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    headerImageView.clipsToBounds = YES;
+    [self.headerView addSubview:headerImageView];
+    self.headerImageView = headerImageView;
+    self.lefttableview.tableHeaderView = self.headerView;
+
 }
-- (void)btntappedle
-{
-    NSLog(@"dianjilebtn");
-}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -61,5 +71,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
      NSLog(@"选中了:%ld",indexPath.row);
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // 获取到tableView偏移量
+    CGFloat Offset_y = scrollView.contentOffset.y;
+    // 下拉 纵向偏移量变小 变成负的
+    if ( Offset_y < 0) {
+        // 拉伸后图片的高度
+        CGFloat totalOffset = KHEIGHT - Offset_y;
+        // 图片放大比例
+        CGFloat scale = totalOffset / KHEIGHT;
+        CGFloat width = self.frame.size.width;
+        // 拉伸后图片位置
+        self.headerImageView.frame = CGRectMake(-(width * scale - width) / 2, Offset_y, width * scale, totalOffset);
+    }
 }
 @end
