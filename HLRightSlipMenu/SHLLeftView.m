@@ -7,7 +7,7 @@
 //
 
 #import "SHLLeftView.h"
-#define KHEIGHT 150
+#define KHEIGHT 152
 @interface SHLLeftView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *lefttableview;
 @property (nonatomic, strong) UIView *headerView;
