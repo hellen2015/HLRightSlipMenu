@@ -53,7 +53,10 @@
     self.lefttableview.tableHeaderView = self.headerView;
 
 }
-
+- (void)btntappedle
+{
+    NSLog(@"dianjilebtn");
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 5;
@@ -64,13 +67,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [NSString stringWithFormat:@"left-%ld",indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     NSLog(@"选中了:%ld",indexPath.row);
+     NSLog(@"选中了左边:%ld",indexPath.row);
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

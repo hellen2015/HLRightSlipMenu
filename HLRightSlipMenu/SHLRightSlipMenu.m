@@ -33,9 +33,9 @@ static SHLRightSlipMenu *rightSlip;
  *  是否可以侧滑,默认为NO。
  */
 @property (assign, nonatomic) BOOL sideslipEnable;
+
 @end
 @implementation SHLRightSlipMenu
-@synthesize leftsildview = __sideView;
 /**
  设置单例
  */
@@ -77,13 +77,13 @@ static SHLRightSlipMenu *rightSlip;
 - (void)setLeftsildview:(UIView *)leftsildview
 {
     CGRect frame = leftsildview.frame;
-    __sideView = leftsildview;
+    _leftsildview = leftsildview;
     CGRect screenFrame = [UIScreen mainScreen].bounds;
     
     if (frame.size.width >= (screenFrame.size.width * 0.8))  frame.size.width = screenFrame.size.width * 0.8;
     if (frame.size.height > screenFrame.size.height)  frame.size.height = screenFrame.size.height;
     
-    __sideView.frame = CGRectMake(-frame.size.width / 2, (screenFrame.size.height - frame.size.height) / 2, frame.size.width, frame.size.height);
+    _leftsildview.frame = CGRectMake(-frame.size.width / 2, (screenFrame.size.height - frame.size.height) / 2, frame.size.width, frame.size.height);
 }
 - (UIPanGestureRecognizer *)panGestureRecognizer
 {
@@ -204,12 +204,12 @@ static SHLRightSlipMenu *rightSlip;
 }
 - (UIView *)sideView
 {
-    if (__sideView && ![__sideView.superview isKindOfClass:[UIWindow class]])
+    if (_leftsildview && ![_leftsildview.superview isKindOfClass:[UIWindow class]])
     {
-        [self.mainviewctrl.view.window insertSubview:__sideView atIndex:0];
+        [self.mainviewctrl.view.window insertSubview:_leftsildview atIndex:0];
         self.mainviewctrl.view.window.userInteractionEnabled = YES;
     }
-    return __sideView;
+    return _leftsildview;
 }
 - (void)onBackButton:(id)sender
 {

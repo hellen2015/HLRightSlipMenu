@@ -45,6 +45,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [NSString stringWithFormat:@"home-%ld",indexPath.row];
     return cell;
